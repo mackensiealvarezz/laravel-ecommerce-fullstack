@@ -5,9 +5,12 @@ namespace App\Imports;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class UsersImport implements ToModel, WithHeadingRow {
+
+    use Importable;
     /**
     * @param array $row
     *
@@ -16,6 +19,7 @@ class UsersImport implements ToModel, WithHeadingRow {
     public function model(array $row)
     {
         return new User([
+            'sheetId'         => $row['id'],
             'name'            => $row['name'],
             'email'           => $row['email'],
             'password'        => Hash::make($row['password_plain']),
@@ -28,6 +32,9 @@ class UsersImport implements ToModel, WithHeadingRow {
             'trial_starts_at' => $row['trial_starts_at'],
             'superadmin'      => $row['superadmin'],
             'is_enabled'      => $row['is_enabled'],
+            'created_at'      => $row['created_at'],
+            'updated_at'      => $row['updated_at']
         ]);
     }
+
 }
