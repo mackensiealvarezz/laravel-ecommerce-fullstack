@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Imports\InventoryImport;
+use App\Imports\OrdersImport;
+use App\Imports\ProductsImport;
 use Inertia\Inertia;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,22 +23,20 @@ use Illuminate\Foundation\Application;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-
-Route::get('/test', function(){
-    Excel::import(new UsersImport, storage_path('app/data/users.csv'));
-    return 'done';
+    return redirect(route('dashboard'));
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//Product CRUD
+Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);
+
+//Orders
+Route::get('orders/breakdown', [OrderController::class, 'breakdown'])->middleware(['auth', 'verified'])->name('orders.breakdown');
+//- CRUD
+Route::resource('orders', OrderController::class)->middleware(['auth', 'verified']);
+
+//Auth
 require __DIR__.'/auth.php';
