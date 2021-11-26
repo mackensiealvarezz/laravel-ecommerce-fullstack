@@ -1,38 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function Input({
-    type = 'text',
+export default function Textarea({
     name,
     value,
     className,
-    autoComplete,
+    rows = 3,
     required,
-    isFocused,
     handleChange,
-    placeholder = ''
 }) {
     const input = useRef();
 
-    useEffect(() => {
-        if (isFocused) {
-            input.current.focus();
-        }
-    }, []);
-
     return (
         <div className="flex flex-col items-start">
-            <input
-                type={type}
+            <textarea
                 name={name}
                 value={value}
+                rows={rows}
                 className={
-                    `border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
+                    `shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md ` +
                     className
                 }
                 ref={input}
-                autoComplete={autoComplete}
                 required={required}
-                placeholder={placeholder}
                 onChange={(e) => handleChange(e)}
             />
         </div>
