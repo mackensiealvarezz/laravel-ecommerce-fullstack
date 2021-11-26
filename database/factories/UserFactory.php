@@ -17,23 +17,21 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'shop_name' => $this->faker->company(),
+            'shop_domain' => $this->faker->company(),
+            'card_brand'  => 'Amex',
+            'card_last_four' => $this->faker->randomNumber(4),
+            'billing_plan' => 'Startup',
+            'trial_ends_at' => now(),
+            'trial_starts_at' => now(),
+            'superadmin' => 0,
+            'is_enabled' => 1,
             'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+
 }
