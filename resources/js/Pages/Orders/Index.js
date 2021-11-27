@@ -67,7 +67,6 @@ export default function Index(props) {
                             name="search"
                             value={data.search || ''}
                             handleChange={onHandleChange}
-                            required={true}
                             placeholder="Search By Product or sku"
                         />
                         <Button processing={processing}>Search</Button>
