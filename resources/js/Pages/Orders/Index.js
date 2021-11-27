@@ -5,6 +5,7 @@ import Pagination from '@/Components/Pagination';
 import Button from '@/Components/Button';
 import FlashMessage from '@/Components/FlashMessage';
 import Input from '@/Components/Input';
+import formatCentsToDollars from '@/Util/FormatCentsToDollars';
 
 export default function Index(props) {
 
@@ -17,10 +18,6 @@ export default function Index(props) {
     };
 
     const orders = props.orders;
-
-    const formatCentsToDollars = (cents) => {
-        return cents / 100;
-    }
 
     const stats = [
         { name: 'Total Orders', stat: orders.total },

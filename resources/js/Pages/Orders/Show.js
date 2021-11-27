@@ -5,14 +5,12 @@ import Pagination from '@/Components/Pagination';
 import Button from '@/Components/Button';
 import FlashMessage from '@/Components/FlashMessage';
 import Input from '@/Components/Input';
+import formatCentsToDollars from '@/Util/FormatCentsToDollars';
 
 export default function Show(props) {
 
     const order = props.order;
 
-    const formatCentsToDollars = (cents) => {
-        return cents / 100;
-    }
 
     const orderDetails = [
         { name: 'Full name', value: order.name },
@@ -21,7 +19,7 @@ export default function Show(props) {
         { name: 'Transaction ID', value: order.transaction_id },
         { name: 'Shipper', value: order.shipper_name },
         { name: 'Tracking Number', value: order.tracking_number },
-        { name: 'Total', value: order.total_cents },
+        { name: 'Total', value: `$${formatCentsToDollars(order.total_cents)}` },
     ];
 
     const productDetails = [
