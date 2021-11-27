@@ -49,6 +49,13 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Display a breakdown of orders per state.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
     public function breakdown(Request $request)
     {
 

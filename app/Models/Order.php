@@ -58,6 +58,7 @@ class Order extends Model
 
     public function scopeSearch($query, string $terms = null)
     {
+        //Split by word then do a like query per word
         collect(explode(' ', $terms))->filter()->each(function ($term) use ($query){
 
             $term = "%".$term."%";

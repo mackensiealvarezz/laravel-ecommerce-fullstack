@@ -62,8 +62,6 @@ class User extends Authenticatable
 
     public function orders()
     {
-        //Grab all products that belong to me
-        //find all orders
         return $this->hasManyThrough(
             Order::class,
             Product::class,
