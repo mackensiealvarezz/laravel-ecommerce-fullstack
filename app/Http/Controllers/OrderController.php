@@ -69,6 +69,7 @@ class OrderController extends Controller
                     ->selectRaw("count(case when order_status = 'Open' then 1 end) as open")
                     ->selectRaw("count(case when order_status = 'Pending' then 1 end) as pending")
                     ->groupBy('state')
+                    ->orderBy('state', 'ASC')
                     ->paginate()
         ]);
     }
